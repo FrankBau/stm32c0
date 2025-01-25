@@ -4,5 +4,5 @@
 
 ## STM32C0 Projects
 
-- [blinky](../blinky/)
+- [blinky](blinky/)
 
