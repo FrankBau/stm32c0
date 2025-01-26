@@ -64,4 +64,12 @@ The final `build/*.bin` binary image file can be simply flashed by dragged it on
 
 ### PWR
 
+### CRC
+
+- [crc](https://github.com/FrankBau/stm32c0/tree/main/crc)
+
+
 ### Arm Cortex-M0+
+
+- [systick](https://github.com/FrankBau/stm32c0/tree/main/systick) - SysTick delay
+- [mpu](https://github.com/FrankBau/stm32c0/tree/main/mpu) - Memory Protection Unit

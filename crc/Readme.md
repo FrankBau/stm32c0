@@ -1,0 +1,1 @@
+this shows how the CRC unit is used to compute a CRC-32 checksum.
