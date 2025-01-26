@@ -54,11 +54,16 @@ The final `build/*.bin` binary image file can be simply flashed by dragged it on
 
 ### ADC
 
+ - [adc_single_sw](https://github.com/FrankBau/stm32c0/tree/main/adc_single_sw) - single channel, software triggered ADC analog voltage measurement
+ - [adc_multi_dma](https://github.com/FrankBau/stm32c0/tree/main/adc_multi_dma) - multi channel ADC measurements, including MCU temperature and Vdda
+
 ### IWDG
 
 ### RTC
 
 ### Flash
+
+- [flash](https://github.com/FrankBau/stm32c0/tree/main/flash) - storing and incrementing a persistent boot counter at the end of the flash memory
 
 ### RCC
 
@@ -66,10 +71,10 @@ The final `build/*.bin` binary image file can be simply flashed by dragged it on
 
 ### CRC
 
-- [crc](https://github.com/FrankBau/stm32c0/tree/main/crc)
+- [crc](https://github.com/FrankBau/stm32c0/tree/main/crc) - show crc-32 calculation for a message in software and hardware and compare the results
 
 
 ### Arm Cortex-M0+
 
 - [systick](https://github.com/FrankBau/stm32c0/tree/main/systick) - SysTick delay
-- [mpu](https://github.com/FrankBau/stm32c0/tree/main/mpu) - Memory Protection Unit
+- [mpu](https://github.com/FrankBau/stm32c0/tree/main/mpu) - Memory Protection Unit - protect against NULL pointer dereferencing 

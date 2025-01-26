@@ -1,0 +1,1 @@
+single channel, software triggered ADC analog voltage measurement
