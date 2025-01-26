@@ -31,20 +31,31 @@ void init_UART1(void) {
 }
 
 
-// implement __io_putchar() to redirect printf() to USART1
-// see syscall.c to see how this function is used
-int __io_putchar(int ch) {
-    while (!(USART1->ISR & USART_ISR_TXE_TXFNF))
-        ;   // loop while the TX register is not empty (last transmission not completed)
-    USART1->TDR = (uint8_t)ch;  // write the char to the transmit data register
-    return ch;                  // indicate success to the caller
+char rot13(char ch)
+{
+    if ('0' <= ch && ch <= '9')
+        ch = '0' + (ch - '0' + 5) % 10;
+    else if ('A' <= ch && ch <= 'Z')
+        ch = 'A' + (ch - 'A' + 13) % 26;
+    else if ('a' <= ch && ch <= 'z')
+        ch = 'a' + (ch - 'a' + 13) % 26;
+    return ch;
 }
 
 
-int main(void) {
-    setbuf(stdout, NULL);   		// optional: make stdout unbuffered
-    init_UART1();           		// setup USART1
-    printf("Hello, world.\n");      // maybe printf("Hello, world.\r\n");
-    /* Loop forever */
-    for(;;);
+int main(void)
+{
+    init_UART1();
+    USART1->TDR = '>'; // == ASCII code 62 == 0x2E; greet the other side with a prompt
+    while (1) {
+        while (!(USART1->ISR & USART_ISR_RXNE_RXFNE))
+            ;	// loop while the RX register is empty (nothing received)
+        char ch = (char)USART1->RDR;	// read the byte received
+        ch = rot13(ch);			// apply the rot13 scrambling algorithm
+        while (!(USART1->ISR & USART_ISR_TXE_TXFNF))
+            ;	// loop while the TX register is not empty (last transmission not completed)
+        USART1->TDR = (uint8_t)ch;	// write the char to transmit
+    }
+    return 0;
 }
+

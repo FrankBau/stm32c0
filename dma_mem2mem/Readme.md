@@ -1,0 +1,1 @@
+printing a string that is filled by mem2mem DMA

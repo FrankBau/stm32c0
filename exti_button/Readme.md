@@ -1,2 +1,1 @@
-blinky example for the STM32C0116-DK
-using CMSIS core headers and common files
+Pin PA8 is used for EXTI interrupt generation.
