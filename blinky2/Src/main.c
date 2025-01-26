@@ -1,12 +1,13 @@
-#include <stm32c011xx.h>
-#include <gpio.h>
-
+#define STM32C011xx
 #define LED PB6
+
+#include <stm32c0xx.h>
+#include <gpio.h>
 
 int main(void)
 {
     gpio_init();
-    gpio_output(LED);
+    gpio_set_mode(LED, 1);  // set LED pin to GPIO output mode
     
     /* Loop forever */
     for(;;) {

@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "blinky"
+		},
+		{
+			"path": "blinky2"
+		},
+		{
+			"path": "exti_button"
+		},
+		{
+			"path": "usart_printf"
+		}
+	],
+	"settings": {}
+}
