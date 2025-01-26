@@ -1,6 +1,6 @@
 # STM32C0 Register-Level Guide
 
-[The STM32C0 Register-Level Guide](docs/STM32C0 Register-Level Guide.pdf)
+[The STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf)
 
 ## STM32C0 Projects
 
