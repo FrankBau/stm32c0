@@ -13,6 +13,6 @@ Detailed infos are in the ~100 pages .pdf [STM32C0 Register-Level Guide](docs/ST
 
 ## STM32C0 Projects
 
-- [blinky](tree/main/blinky/) - blink the on-board LED using CMSIS header files
-- [blinky2](tree/main/blinky2/) - blink the on-board LED using CMSIS header files and files from common
+- [blinky](blinky/) - blink the on-board LED using CMSIS header files
+- [blinky2](blinky2/) - blink the on-board LED using CMSIS header files and files from common
 
