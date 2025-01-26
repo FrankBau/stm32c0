@@ -2,7 +2,9 @@
 
 ## The Guide
 
-... is a single, about 100 pages document which gets you started with STM32 microcontroller software development: [STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf).
+... is a single, about 100 pages document which gets you started with STM32 microcontroller software development:
+
+[STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf).
 
 ## The Examples
 
