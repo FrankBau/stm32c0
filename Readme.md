@@ -3,27 +3,30 @@
 
 ## The Guide
 
-The [STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf) is an attempt to get you started with STM32 microcontroller development in a single, about 100 pages document.
-It shows relevant tools and points 
+The [STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf) is an attempt to get you started with STM32 microcontroller development by following a single, about 100 pages document.
+It uses a simple VS Code workflow and points you to the relevant documentation and additional material.
 
 
-## The Projects
+## The Examples
 
-the following register-level C-code projects 
+The examples are discussed in the guide. They
 
+- are register-level C-code projects 
 - use only the [STM32C0 CMSIS headers](https://github.com/STMicroelectronics/STM32CubeC0/tree/main/Drivers/CMSIS) 
 - build using [Visual Studio Code](https://code.visualstudio.com/)
 - with the [STM32 VS Code Extension](https://marketplace.visualstudio.com/items?itemName=stmicroelectronics.stm32-vscode-extension)
 - run on the [STM32C0116-DK Discovery kit with STM32C011F6 MCU](https://www.st.com/en/evaluation-tools/stm32c0116-dk.html)
 
-But are easily portable to other STM32C0 boards like the Nucleo boards and also to the other series of STM32 microcontrollers.
+They should be easily portable to other STM32C0 boards like the Nucleo boards and also to the other series of STM32 microcontrollers.
 
 If you prefer command line builds, check out the [repo](https://github.com/FrankBau/stm32c0/), navigate to a project, and issue from a command prompt:
 ```
 cmake -G Ninja -B build
 cmake --build build
 ```
-The final `build/*.bin` file can be simply flashed by dragged it onto the new USB drive that appears when you connect the board via USB to the build host.  
+The final `build/*.bin` binary image file can be simply flashed by dragged it onto the new USB drive that appears when you connect the board via USB to the build host. But, of cause, interactive debugging gives you deeper insights.
+
+## Example List
 
 ### GPIO
 
