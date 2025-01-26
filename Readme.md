@@ -3,9 +3,9 @@
 
 ## The Guide
 
-The [STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf) is an attempt to get you started with STM32 microcontroller development by following a single, about 100 pages document.
-It uses a simple VS Code workflow and points you to the relevant documentation and additional material.
-
+- is a single, about 100 pages document which gets you started with STM32 microcontroller development: [STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf
+- uses a simple VS Code workflow and points you to the relevant documentation and additional material.
+- contains many basic examples:
 
 ## The Examples
 
@@ -24,7 +24,7 @@ If you prefer command line builds, check out the [repo](https://github.com/Frank
 cmake -G Ninja -B build
 cmake --build build
 ```
-The final `build/*.bin` binary image file can be simply flashed by dragged it onto the new USB drive that appears when you connect the board via USB to the build host. But, of cause, interactive debugging gives you deeper insights.
+The final `build/*.bin` binary image file can be simply flashed by dragged it onto the new USB drive that appears when you connect the board via USB to the build host. But, of course, interactive debugging can give you much deeper insights.
 
 ## Example List
 
