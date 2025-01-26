@@ -3,10 +3,11 @@
 This is a collection of register-level C code projects 
 
 - using only the [STM32C0 CMSIS headers](https://github.com/STMicroelectronics/STM32CubeC0/tree/main/Drivers/CMSIS) 
-- buildable using [Visual Studio Code](https://code.visualstudio.com/) with the [STM32 VS Code Extension]((https://marketplace.visualstudio.com/items?itemName=stmicroelectronics.stm32-vscode-extension)
+- buildable using [Visual Studio Code](https://code.visualstudio.com/)
+- with the [STM32 VS Code Extension](https://marketplace.visualstudio.com/items?itemName=stmicroelectronics.stm32-vscode-extension)
 - runnable on the [STM32C0116-DK Discovery kit with STM32C011F6 MCU](https://www.st.com/en/evaluation-tools/stm32c0116-dk.html)
 
-But easily portable to other STM32C0 boards like the Nucelo boards and even to other series of STM32 microcontrollers.
+But easily portable to other STM32C0 boards like the Nucelo boards and also to the other series of STM32 microcontrollers.
 
 Detailed infos are in the ~100 pages .pdf [STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf)
 
