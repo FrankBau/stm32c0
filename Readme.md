@@ -9,7 +9,14 @@ This is a collection of register-level C code projects
 
 But easily portable to other STM32C0 boards like the Nucelo boards and also to the other series of STM32 microcontrollers.
 
-Detailed infos are in the ~100 pages .pdf [STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf)
+If you prefer command line builds, check out the repo, navigate to a project, and issue from a command prompt:
+```
+cmake -G Ninja -B build
+cmake --build build
+```
+The final `build/*.bin` file can be simply flashed by dragged it onto the new USB drive that appears when you connect the board via USB to the build host.  
+
+Detailed infos are in the ~100 pages [STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf)
 
 ## STM32C0 Projects
 
