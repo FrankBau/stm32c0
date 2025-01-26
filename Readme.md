@@ -3,8 +3,9 @@
 
 ## The Guide
 
-... is a single, about 100 pages document which gets you started with STM32 microcontroller development: [STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf)
-with the help of numerous examples:  
+... is a single, about 100 pages document which gets you started with STM32 microcontroller software development: [STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf).
+
+It contains numerous examples:  
 
 ## The Examples
 
@@ -16,7 +17,9 @@ The examples are discussed in the guide. They
 - with the [STM32 VS Code Extension](https://marketplace.visualstudio.com/items?itemName=stmicroelectronics.stm32-vscode-extension)
 - run on the [STM32C0116-DK Discovery kit with STM32C011F6 MCU](https://www.st.com/en/evaluation-tools/stm32c0116-dk.html)
 
-They should be easily portable to other STM32C0 boards like the Nucleo boards and also to the other series of STM32 microcontrollers.
+for the details,m consult the guide.
+
+The examples should be easily portable to other STM32C0 boards like the Nucleo boards and also to the other series of STM32 microcontrollers.
 
 If you prefer command line builds, check out the [repo](https://github.com/FrankBau/stm32c0/), navigate to a project, and issue from a command prompt:
 ```
