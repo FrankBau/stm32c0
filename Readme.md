@@ -3,9 +3,8 @@
 
 ## The Guide
 
-- is a single, about 100 pages document which gets you started with STM32 microcontroller development: [STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf)
-- uses a simple VS Code workflow and points you to the relevant documentation and additional material.
-- contains many basic examples:
+... is a single, about 100 pages document which gets you started with STM32 microcontroller development: [STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf)
+with the help of numerous examples:  
 
 ## The Examples
 
