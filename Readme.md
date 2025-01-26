@@ -1,15 +1,12 @@
 # STM32C0 Register-Level Guide
 
-
 ## The Guide
 
 ... is a single, about 100 pages document which gets you started with STM32 microcontroller software development: [STM32C0 Register-Level Guide](docs/STM32C0%20Register-Level%20Guide.pdf).
 
-It contains numerous examples:  
-
 ## The Examples
 
-The examples are discussed in the guide. They
+Many examples are discussed in the guide. They
 
 - are register-level C-code projects 
 - use only the [STM32C0 CMSIS headers](https://github.com/STMicroelectronics/STM32CubeC0/tree/main/Drivers/CMSIS) 
@@ -17,16 +14,9 @@ The examples are discussed in the guide. They
 - with the [STM32 VS Code Extension](https://marketplace.visualstudio.com/items?itemName=stmicroelectronics.stm32-vscode-extension)
 - run on the [STM32C0116-DK Discovery kit with STM32C011F6 MCU](https://www.st.com/en/evaluation-tools/stm32c0116-dk.html)
 
-for the details,m consult the guide.
+for the details, consult the guide.
 
 The examples should be easily portable to other STM32C0 boards like the Nucleo boards and also to the other series of STM32 microcontrollers.
-
-If you prefer command line builds, check out the [repo](https://github.com/FrankBau/stm32c0/), navigate to a project, and issue from a command prompt:
-```
-cmake -G Ninja -B build
-cmake --build build
-```
-The final `build/*.bin` binary image file can be simply flashed by dragged it onto the new USB drive that appears when you connect the board via USB to the build host. But, of course, interactive debugging can give you much deeper insights.
 
 ## Example List
 
