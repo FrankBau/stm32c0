@@ -50,9 +50,8 @@ int main(void) {
     // setup UART
     RCC->APBENR2 |= RCC_APBENR2_USART1EN;
     (void)RCC->APBENR2; // ensure that the last instruction finished and the clock is on
-
     uint32_t baud_rate = 115200;
-    USART1->BRR = 12000000 / baud_rate; // == 104 == 0x68; assuming SYSCLK = 12MHz
+    USART1->BRR = (12000000 + (baud_rate/2)) / baud_rate;    // rounded, SYSCLK after reset
     // enable UART including RXNE interrupt generation in USART peripheral
     USART1->CR1 = USART_CR1_UE | USART_CR1_RE | USART_CR1_TE | USART_CR1_RXNEIE_RXFNEIE;
 

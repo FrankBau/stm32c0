@@ -7,6 +7,7 @@
 #include <stdio.h>
 
 
+// USART1 on PA9 and PA10 for STM32C011-DK
 void init_UART1(void) {
     RCC->APBENR2 |= RCC_APBENR2_SYSCFGEN;   // enable clock for peripheral component 
     (void)RCC->APBENR2; // ensure that the last instruction finished and the clock is now on
@@ -26,7 +27,8 @@ void init_UART1(void) {
 
     RCC->APBENR2 |= RCC_APBENR2_USART1EN;
     (void)RCC->APBENR2; // ensure that the last instruction finished and the clock is on
-    USART1->BRR = 12000000 / 115200; // for SYSCLK = 12MHz and baud rate 115200
+    uint32_t baud_rate = 115200;
+    USART1->BRR = (12000000 + (baud_rate/2)) / baud_rate;    // rounded, SYSCLK after reset
     USART1->CR1 = USART_CR1_UE | USART_CR1_RE | USART_CR1_TE;   // enable UART, RX, TX 
 }
 
