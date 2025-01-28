@@ -24,27 +24,30 @@ The examples should be easily portable to other STM32C0 boards like the Nucleo b
 
 ### GPIO
 
-- [blinky](https://github.com/FrankBau/stm32c0/tree/main/blinky/) - blink the on-board LED using CMSIS header files only
-- [blinky2](https://github.com/FrankBau/stm32c0/tree/main/blinky2/) - blink the on-board LED using CMSIS header files and files from the common folder
-- [exti_button](https://github.com/FrankBau/stm32c0/tree/main/exti_button)
+- [gpio_blinky](https://github.com/FrankBau/stm32c0/tree/main/gpio_blinky/) - blink the on-board LED using CMSIS header files only
+- [gpio_debouncing](https://github.com/FrankBau/stm32c0/tree/main/gpio_debouncing/) - debounce a button by polling
+- [exti_button](https://github.com/FrankBau/stm32c0/tree/main/exti_button) - trigger EXTI interrupt from button press
 
 ### UART
 
 - [usart_echo](https://github.com/FrankBau/stm32c0/tree/main/usart_echo)
-- [usart_printf](https://github.com/FrankBau/stm32c0/tree/main/usart_printf)
+- [usart_printf](https://github.com/FrankBau/stm32c0/tree/main/usart_printf) - redirect stdout (printf) to debug host
 - [usart_rx_dma_idle_irq](https://github.com/FrankBau/stm32c0/tree/main/usart_rx_dma_idle_irq)
 - [usart_rx_irq](https://github.com/FrankBau/stm32c0/tree/main/usart_rx_irq)
 
 ### DMA
 
 - [dma_mem2mem](https://github.com/FrankBau/stm32c0/tree/main/dma_mem2mem)
-- [dma_mem2uart](https://github.com/FrankBau/stm32c0/tree/main/dma_mem2uart)
+- [dma_mem2uart](https://github.com/FrankBau/stm32c0/tree/main/dma_mem2uart) - 
 
 ### SPI
 
 ### I2C
 
 ### Timer
+
+- [tim_upcount](https://github.com/FrankBau/stm32c0/tree/main/tim_upcount) - set timer TIM14 in upcounting mode. used for a delay function
+- [tim_pwm_out](https://github.com/FrankBau/stm32c0/tree/main/tim_pwm_out) - LED dimming using a timer channel in PWM output mode
 
 ### ADC
 
@@ -57,11 +60,15 @@ The examples should be easily portable to other STM32C0 boards like the Nucleo b
 
 ### Flash
 
-- [flash](https://github.com/FrankBau/stm32c0/tree/main/flash) - storing and incrementing a persistent boot counter at the end of the flash memory
+- [flash_boot_counter](https://github.com/FrankBau/stm32c0/tree/main/flash_boot_counter) - storing and incrementing a persistent boot counter at the end of the flash memory
 
 ### RCC
 
 ### PWR
+
+- [stop_uart](https://github.com/FrankBau/stm32c0/tree/main/stop_uart) - entering the stop low-power mode with wakeup from USART1 receive 
+- [standby_iwdg](https://github.com/FrankBau/stm32c0/tree/main/standby_iwdg) - entering the standby low-power mode with periodic wakeup by IWDG 
+
 
 ### CRC
 

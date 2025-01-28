@@ -1,0 +1,1 @@
+entering stop low-power mode with wakeup from USART1 receive for receive interrupt processing only

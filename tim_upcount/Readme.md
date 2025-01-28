@@ -1,0 +1,1 @@
+set timer TIM14 in upcounting mode. used for a delay function
