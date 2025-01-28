@@ -1,0 +1,1 @@
+entering the standby low-power mode with periodic wakeup by IWDG 

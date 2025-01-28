@@ -35,6 +35,12 @@ void init_TIM3(void) {
 }
 
 
+// outlook: 
+// - enable TIM3 update interrupt, 
+// - count milliseconds in the interrupt handler,
+// - implement (another) proper delay(ms) function
+
+
 int main(void) {
 
     init_PB6();
@@ -42,7 +48,8 @@ int main(void) {
 
     /* Loop forever */
     for(;;) {
-        for(volatile int i=0; i<1000; ++i);
-        TIM3->CCR1 = (TIM3->CCR1 + 1) % 1000;
+        for(volatile int i=0; i<1000; ++i);     // some delay
+        TIM3->CCR1 = (TIM3->CCR1 + 1) % 1000;   // slowly increase PWM duty period
     }
 }
+
