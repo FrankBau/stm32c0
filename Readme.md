@@ -58,6 +58,8 @@ The examples should be easily portable to other STM32C0 boards like the Nucleo b
 
 ### RTC
 
+- [rtc_alarm_irq](https://github.com/FrankBau/stm32c0/tree/main/rtc_alarm_irq) - set a periodic RTC alarm interrupt, used to toggle a LED once per minute
+
 ### Flash
 
 - [flash_boot_counter](https://github.com/FrankBau/stm32c0/tree/main/flash_boot_counter) - storing and incrementing a persistent boot counter at the end of the flash memory

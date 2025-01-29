@@ -1,0 +1,1 @@
+set the SYSCLK to higher frequencies
