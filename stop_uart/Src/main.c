@@ -75,7 +75,7 @@ int main(void)
     
     init_UART1();
     /* Loop forever */
-    SCB->SCR |= SCB_SCR_SLEEPONEXIT; // optional: re-enter sleep mode after ISR exit
+    SCB->SCR |= SCB_SCR_SLEEPONEXIT_Msk; // optional: automatically re-enter sleep mode on ISR exit
 	for(;;) {
         USART1->TDR = '$'; // send a prompt
         while(!(USART1->ISR & USART_ISR_TC));   // wait for UART transmission completed

@@ -66,6 +66,9 @@ The examples should be easily portable to other STM32C0 boards like the Nucleo b
 
 ### RCC
 
+- [rcc_sysclk](https://github.com/FrankBau/stm32c0/tree/main/rcc_sysclk) - set the SYSCLK to 24 MHz
+
+
 ### PWR
 
 - [stop_uart](https://github.com/FrankBau/stm32c0/tree/main/stop_uart) - entering the stop low-power mode with wakeup from USART1 receive 
