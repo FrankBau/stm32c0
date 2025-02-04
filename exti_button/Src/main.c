@@ -1,8 +1,14 @@
 #define STM32C011xx
-#define LED PB6
-
 #include <stm32c0xx.h>
-#include <gpio.h>
+
+
+void init_LED(void) {
+    RCC->IOPENR |= RCC_IOPENR_GPIOBEN;  // enable GPIOB port by switching its clock on
+    (void)RCC->IOPENR; // read back the register to make sure that the clock is now on
+
+    // set the pin PB6 to general purpose **output** mode (which is mode 1)
+    GPIOB->MODER = (GPIOB->MODER & ~GPIO_MODER_MODE6_Msk) | (1 << GPIO_MODER_MODE6_Pos);
+}
 
 
 // PA8  is connected to the (analog) joystick of the STM323C0116-DK, 
@@ -47,9 +53,7 @@ void EXTI4_15_IRQHandler(void) {
 
 
 int main(void) {
-    gpio_init();
-    gpio_set_mode(LED, 1);  // set LED pin to GPIO output mode
-    
+    init_LED();    
     init_EXTI();    // initialize EXTI for PA8
 
     /* Loop forever */

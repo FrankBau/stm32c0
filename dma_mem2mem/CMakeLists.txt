@@ -37,7 +37,6 @@ set(sources_SRCS)
 set(include_DIRS
     ../CMSIS/Core/Include
     ../CMSIS/Device/ST/STM32C0xx/Include
-    ../common/Inc
 )
 
 # Include directories for each compiler

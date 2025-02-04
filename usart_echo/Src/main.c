@@ -1,8 +1,5 @@
 #define STM32C011xx
-#define LED PB6
-
 #include <stm32c0xx.h>
-#include <gpio.h>
 
 #include <stdio.h>
 
@@ -60,4 +57,3 @@ int main(void)
     }
     return 0;
 }
-

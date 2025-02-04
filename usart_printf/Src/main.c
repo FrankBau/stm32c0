@@ -2,7 +2,6 @@
 #define LED PB6
 
 #include <stm32c0xx.h>
-#include <gpio.h>
 
 #include <stdio.h>
 
