@@ -13,9 +13,6 @@
 // system clock and sets its prescaler division factor to four (HSIDIV[2:0]=010).
 void Standby(void)
 {
-	RCC->APBENR1 |= RCC_APBENR1_PWREN; // enable the power interface clock
-	(void)RCC->APBENR1;				   // read back the register to make sure that clock is now on
-
 	// Configure wake-up features
 	// ...
 	PWR->SCR |= PWR_SCR_CWUF | PWR_SCR_CSBF; // clear all wakeup flags, must be done last
@@ -28,8 +25,6 @@ void Standby(void)
 	PWR->CR1 |= PWR_CR1_FPD_SLP_Msk;									 // Flash power down mode during sleep
 	(void)PWR->CR1;														 // ensure completion of previous write
 
-	PWR->BKP0R = 0xFBCEUL; // write a value to the backup register to check if it is preserved in standby mode
-
 	DBG->CR &= ~DBG_CR_DBG_STANDBY; // disable debug in standby mode
 
 	// Enter low-power mode
@@ -40,23 +35,19 @@ void Standby(void)
 	}
 }
 
+// Configuring the IWDG (when the window option is disabled)
 void init_IWDG(void)
 {
 	// IWDG is independently clocked by the 32 kHz LSI clock, no need to switch a clock on
-	IWDG->KR = 0x5555; // key register: unprotect access to IWDG. must be done first
 
-	while (IWDG->SR & IWDG_SR_PVU)
-		;		  // must wait until hardware is ready for register update
-	IWDG->PR = 7; // maximum prescaler of 256. -> IWDG counts at 125 Hz
+	IWDG->KR = 0xCCCC; 	// key register: enable the watchdog
+	IWDG->KR = 0x5555; 	// key register: unprotect register write access
 
-	while (IWDG->SR & IWDG_SR_RVU)
-		;			  // must wait until hardware is ready for register update
-	IWDG->RLR = 1250; // reload register. IWDG expires after 10 seconds
-
-	IWDG->KR = 0xAAAA; // key register: reload the watchdog down counter
-	IWDG->KR = 0xCCCC; // key register: start the watchdog
-
-	__disable_irq(); // disable any IRQ (not used in this example, but keep in mind)
+	IWDG->PR = 7; 		// maximum prescaler of 256. -> IWDG counts at 125 Hz
+	IWDG->RLR = 625; 	// reload register. IWDG expires after 5 seconds
+	while (IWDG->SR); 	// wait until the reload value is updated
+	
+	IWDG->KR = 0xAAAA; 	// key register: refresh the watchdog
 }
 
 
@@ -88,19 +79,35 @@ void delay_ms(uint32_t milliseconds)
 	}
 }
 
+void blink(int n, int ms)
+{
+	for (int i = 0; i < 2*n; ++i)
+	{
+		GPIOB->ODR ^= ~GPIO_ODR_OD3; // toggle LED
+		delay_ms(ms);
+	}
+}
+
 int main(void)
 {
 	// Upon power-on reset or upon wake-up from Standby, the HCLK clock frequency is automatically set to 12 MHz
-
-	// inspect reset flags here ...
-	RCC->CSR2 |= RCC_CSR2_RMVF; // remove (clear) all reset flags
-
 	init_LED();
 
-	GPIOB->ODR &= ~GPIO_ODR_OD3; // LED on
-	delay_ms(3000);				 // wait to ease debugging
-	GPIOB->ODR |= GPIO_ODR_OD3;	 // LED off
-	delay_ms(3000);				 // wait to ease debugging
+	RCC->APBENR1 |= RCC_APBENR1_PWREN; // enable the power interface clock
+	(void)RCC->APBENR1;				   // read back the register to make sure that clock is now on
+
+	// check if the reset was caused by the IWDG
+	if(RCC->CSR2 & RCC_CSR2_IWDGRSTF) {
+		int n = PWR->BKP0R;				// read the backup register which survived the standby mode
+		blink(n, 200);
+		PWR->BKP0R = (n + 1) % 5;		// increment the backup register modulo 5
+	} else {
+		blink(3, 1000);
+		PWR->BKP0R = 3;					// set the backup register initial value
+	}
+	RCC->CSR2 |= RCC_CSR2_RMVF; // remove (clear) all reset flags
+
+	delay_ms(1000);				 // wait to help debugging
 
 	init_IWDG(); // for periodic wakeup
 
