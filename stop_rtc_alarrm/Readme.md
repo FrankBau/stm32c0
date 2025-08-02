@@ -1,0 +1,1 @@
+entering stop mode with periodic wakeup by RTC alarm
