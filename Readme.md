@@ -12,8 +12,8 @@ Many examples are discussed in the guide. They
 
 - are register-level C-code projects 
 - use only the [STM32C0 CMSIS headers](https://github.com/STMicroelectronics/STM32CubeC0/tree/main/Drivers/CMSIS) 
-- build using [Visual Studio Code](https://code.visualstudio.com/)
-- with the [STM32 VS Code Extension](https://marketplace.visualstudio.com/items?itemName=stmicroelectronics.stm32-vscode-extension)
+- build using [Visual Studio Code](https://code.visualstudio.com/) 
+- with the [STM32 VS Code Extension](https://marketplace.visualstudio.com/items?itemName=stmicroelectronics.stm32-vscode-extension) Version 2.x
 - run on the [STM32C0116-DK Discovery kit with STM32C011F6 MCU](https://www.st.com/en/evaluation-tools/stm32c0116-dk.html)
 
 for the details, consult the guide.
@@ -59,6 +59,7 @@ The examples should be easily portable to other STM32C0 boards like the Nucleo b
 ### RTC
 
 - [rtc_alarm_irq](https://github.com/FrankBau/stm32c0/tree/main/rtc_alarm_irq) - set a periodic RTC alarm interrupt, used to toggle a LED once per minute
+- [stop_rtc_alarm](https://github.com/FrankBau/stm32c0/tree/main/stop_rtc_alarm) - set a periodic RTC alarm interrupt to wakeup from stop mode
 
 ### Flash
 
