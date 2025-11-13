@@ -20,6 +20,23 @@ for the details, consult the guide.
 
 The examples should be easily portable to other STM32C0 boards like the Nucleo boards and also to the other series of STM32 microcontrollers.
 
+## How to build
+
+This works from the cmd line or VS Code Terminal. 
+```
+mkdir build
+cmake -S. -B build -G Ninja -DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-arm-none-eabi.cmake -DCMAKE_BUILD_TYPE=Debug
+cmake --build build
+```
+
+variants:
+
+```
+cmake --build build --verbose
+cmake --build build --clean-first
+cmake --build build --target clean
+```
+
 ## Example List
 
 ### GPIO

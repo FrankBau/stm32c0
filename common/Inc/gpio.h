@@ -3,6 +3,9 @@
 
 #include <stm32c011xx.h>
 
+// gpio_pin definitions
+// currently only GPIOA and GPIOB are supported
+
 #define  PA0 0x00
 #define  PA1 0x01
 #define  PA2 0x02
@@ -37,34 +40,37 @@
 #define PB14 0x1E
 #define PB15 0x1F
 
-// works for GPIOA, GPIOB, GPIOC, GPIOD, (GPIOE), GPIOF
-#define GPIO_PORT(Pxy)   (GPIO_TypeDef*)(GPIOA_BASE + ((Pxy & 0xF0) << 6))
-
-#define GPIO_PIN(Pxy)    (Pxy & 0x0F)
-
-// currently only GPIOA and GPIOB are supported
 
 // to keep the code small, it is assumed that the microcontroller registers
 // still have their reset default values and were not changed by other code.
 
-// enable clock for GPIOA and GPIOB ports
-// to be called first
-static inline void gpio_init(void)
-{
-    RCC->IOPENR |= RCC_IOPENR_GPIOAEN | RCC_IOPENR_GPIOBEN;
-}
 
-// set the mode of pin Pxy to mode
-// mode is one of the following: 0: input, 1: output, 2: alternate, 3: additional
+// works for GPIOA, GPIOB, GPIOC, GPIOD, (GPIOE), GPIOF
+#define GPIO_PORT_INDEX(Pxy)   ((Pxy & 0xF0) >> 4)
+#define GPIO_PORT(Pxy)   (GPIO_TypeDef*)(IOPORT_BASE + (GPIO_PORT_INDEX(Pxy) << 6))
+#define GPIO_PIN(Pxy)    (Pxy & 0x0F)
+
+
+#define INPUT 0
+#define OUTPUT 1
+#define ALTERNATE 2
+#define ANALOG 3
+
+// set the mode of pin Pxy
 static inline void gpio_set_mode(uint8_t Pxy, int mode)
 {
+    RCC->IOPENR |= (1u << GPIO_PORT_INDEX(Pxy)); // enable clock for the port
     GPIO_TypeDef *port = GPIO_PORT(Pxy);
     int pin = GPIO_PIN(Pxy);
     port->MODER = (port->MODER & ~(3u << (2 * pin))) | (mode << (2 * pin));
 }
 
-// set the pull-up/down of pin Pxy to pull
-// pull is one of the following: 0: no pull, 1: pull-up, 2: pull-down
+
+#define NOPULL 0
+#define PULLUP 1
+#define PULLDOWN 2
+
+// set the pull-up/down of pin Pxy
 static inline void gpio_set_pull(uint8_t Pxy, int pull)
 {
     GPIO_TypeDef *port = GPIO_PORT(Pxy);
@@ -72,8 +78,11 @@ static inline void gpio_set_pull(uint8_t Pxy, int pull)
     port->PUPDR = (port->PUPDR & ~(3u << (2 * pin))) | (pull << (2 * pin));
 }
 
-// set the output type of pin Pxy to type
-// type is one of the following: 0: push-pull, 1: open-drain
+
+#define PUSH_PULL 0
+#define OPEN_DRAIN 1
+
+// set the output type of pin Pxy
 static inline void gpio_set_type(uint8_t Pxy, int type)
 {
     GPIO_TypeDef *port = GPIO_PORT(Pxy);
@@ -81,23 +90,32 @@ static inline void gpio_set_type(uint8_t Pxy, int type)
     port->OTYPER = (port->OTYPER & ~(1u << pin)) | (type << pin);
 }
 
+
 // set the alternate function of pin Pxy to af
 // af is a 4-bit value, see data sheet tables
 static inline void gpio_set_af(uint8_t Pxy, int af)
 {
+    gpio_set_mode(Pxy, ALTERNATE);
+    
     GPIO_TypeDef *port = GPIO_PORT(Pxy);
     int pin = GPIO_PIN(Pxy);
     port->AFR[pin / 8] = (port->AFR[pin / 8] & ~(0xFu << (4 * (pin % 8)))) | (af << (4 * (pin % 8)));
 }
 
+
+#define SPEED_LOW 0
+#define SPEED_MEDIUM 1
+#define SPEED_HIGH 2
+#define SPEED_VERY_HIGH 3
+
 // set the output driver speed of pin Pxy to speed
-// speed is one of the following: 0: slow, 1, 2, 3: very high
 static inline void gpio_set_speed(uint8_t Pxy, int speed)
 {
     GPIO_TypeDef *port = GPIO_PORT(Pxy);
     int pin = GPIO_PIN(Pxy);
     port->OSPEEDR = (port->OSPEEDR & ~(3u << (2 * pin))) | (speed << (2 * pin));
 }
+
 
 // get the input level of pin Pxy
 // returns 0 (low) or 1 (high)
@@ -108,6 +126,7 @@ static inline int gpio_get(uint8_t Pxy)
     return 1u & (port->IDR >> pin);
 }
 
+
 // set the output of pin Pxy to value
 // value is 0 (low) or 1 (high)
 static inline void gpio_set(uint8_t Pxy, int value)
@@ -117,6 +136,7 @@ static inline void gpio_set(uint8_t Pxy, int value)
     port->ODR = (port->ODR & ~(1 << pin)) | (value << pin);
 }
 
+
 // set the output of pin Pxy to 0 (low)
 static inline void gpio_set_0(uint8_t Pxy)
 {
@@ -124,6 +144,7 @@ static inline void gpio_set_0(uint8_t Pxy)
     int pin = GPIO_PIN(Pxy);
     port->BRR = (1u << pin);
 }
+
 
 // set the output of pin Pxy to 1 (high)
 static inline void gpio_set_1(uint8_t Pxy)
@@ -133,6 +154,7 @@ static inline void gpio_set_1(uint8_t Pxy)
     port->BSRR = (1u << pin);
 }
 
+
 // toggle the output of pin Pxy
 // 0 (low) <--> 1 (high)
 static inline void gpio_toggle(uint8_t Pxy)
@@ -141,5 +163,6 @@ static inline void gpio_toggle(uint8_t Pxy)
     int pin = GPIO_PIN(Pxy);
     port->ODR ^= (1 << pin);
 }
+
 
 #endif
