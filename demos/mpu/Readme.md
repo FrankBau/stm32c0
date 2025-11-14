@@ -1,1 +1,0 @@
-this shows how to use the Memory Protection Unit (MPU) to catch NULL pointer dereferencing.

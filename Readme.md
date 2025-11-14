@@ -32,9 +32,9 @@ cmake --build build
 variants:
 
 ```
-cmake --build build --verbose
-cmake --build build --clean-first
-cmake --build build --target clean
+cmake --build --preset Release --verbose
+cmake --build --preset Release --clean-first
+cmake --build --preset Release --target clean
 ```
 
 ## Example List

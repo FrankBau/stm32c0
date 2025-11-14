@@ -40,80 +40,70 @@
 #define PB14 0x1E
 #define PB15 0x1F
 
-
-// to keep the code small, it is assumed that the microcontroller registers
-// still have their reset default values and were not changed by other code.
-
-
-// works for GPIOA, GPIOB, GPIOC, GPIOD, (GPIOE), GPIOF
-#define GPIO_PORT_INDEX(Pxy)   ((Pxy & 0xF0) >> 4)
-#define GPIO_PORT(Pxy)   (GPIO_TypeDef*)(IOPORT_BASE + (GPIO_PORT_INDEX(Pxy) << 6))
-#define GPIO_PIN(Pxy)    (Pxy & 0x0F)
-
-
+// mode
 #define INPUT 0
 #define OUTPUT 1
 #define ALTERNATE 2
 #define ANALOG 3
 
-// set the mode of pin Pxy
-static inline void gpio_set_mode(uint8_t Pxy, int mode)
-{
-    RCC->IOPENR |= (1u << GPIO_PORT_INDEX(Pxy)); // enable clock for the port
-    GPIO_TypeDef *port = GPIO_PORT(Pxy);
-    int pin = GPIO_PIN(Pxy);
-    port->MODER = (port->MODER & ~(3u << (2 * pin))) | (mode << (2 * pin));
-}
-
-
+// pull
 #define NOPULL 0
 #define PULLUP 1
 #define PULLDOWN 2
 
-// set the pull-up/down of pin Pxy
-static inline void gpio_set_pull(uint8_t Pxy, int pull)
-{
-    GPIO_TypeDef *port = GPIO_PORT(Pxy);
-    int pin = GPIO_PIN(Pxy);
-    port->PUPDR = (port->PUPDR & ~(3u << (2 * pin))) | (pull << (2 * pin));
-}
-
-
+// type
 #define PUSH_PULL 0
 #define OPEN_DRAIN 1
 
-// set the output type of pin Pxy
-static inline void gpio_set_type(uint8_t Pxy, int type)
-{
-    GPIO_TypeDef *port = GPIO_PORT(Pxy);
-    int pin = GPIO_PIN(Pxy);
-    port->OTYPER = (port->OTYPER & ~(1u << pin)) | (type << pin);
-}
-
-
-// set the alternate function of pin Pxy to af
-// af is a 4-bit value, see data sheet tables
-static inline void gpio_set_af(uint8_t Pxy, int af)
-{
-    gpio_set_mode(Pxy, ALTERNATE);
-    
-    GPIO_TypeDef *port = GPIO_PORT(Pxy);
-    int pin = GPIO_PIN(Pxy);
-    port->AFR[pin / 8] = (port->AFR[pin / 8] & ~(0xFu << (4 * (pin % 8)))) | (af << (4 * (pin % 8)));
-}
-
-
+// speed
 #define SPEED_LOW 0
 #define SPEED_MEDIUM 1
 #define SPEED_HIGH 2
 #define SPEED_VERY_HIGH 3
 
-// set the output driver speed of pin Pxy to speed
-static inline void gpio_set_speed(uint8_t Pxy, int speed)
+// alternate function
+#define AF0 0
+#define AF1 1
+#define AF2 2
+#define AF3 3
+#define AF4 4
+#define AF5 5
+#define AF6 6
+#define AF7 7
+#define AF8 8    
+#define AF9 9
+#define AF10 10
+#define AF11 11
+#define AF12 12
+#define AF13 13
+#define AF14 14
+#define AF15 15
+
+typedef struct {
+  unsigned int mode : 2;    // INPUT, OUTPUT, ALTERNATE, ANALOG
+  unsigned int pull : 2;    // NOPULL, PULLUP, PULLDOWN
+  unsigned int type : 1;    // PUSH_PULL, OPEN_DRAIN
+  unsigned int speed : 2;   // SPEED_LOW, SPEED_MEDIUM, SPEED_HIGH, SPEED_VERY_HIGH
+  unsigned int af : 4;      // AF0 - AF15
+} gpio_setup_t;
+
+
+// works for GPIOA, GPIOB, GPIOC, GPIOD, (GPIOE), GPIOF
+#define GPIO_PORT_INDEX(Pxy)   ((Pxy & 0xF0) >> 4)
+#define GPIO_PORT(Pxy)   (GPIO_TypeDef*)((uintptr_t)IOPORT_BASE + (0x400UL * GPIO_PORT_INDEX(Pxy)))
+#define GPIO_PIN(Pxy)    (Pxy & 0x0F)
+
+
+static inline void gpio_setup(uint8_t Pxy, gpio_setup_t setup)
 {
+    RCC->IOPENR |= (1u << GPIO_PORT_INDEX(Pxy)); // enable clock for the port
     GPIO_TypeDef *port = GPIO_PORT(Pxy);
     int pin = GPIO_PIN(Pxy);
-    port->OSPEEDR = (port->OSPEEDR & ~(3u << (2 * pin))) | (speed << (2 * pin));
+
+    port->MODER = (port->MODER & ~(3u << (2 * pin))) | (setup.mode << (2 * pin));
+    port->OTYPER = (port->OTYPER & ~(1u << pin)) | (setup.type << pin);
+    port->AFR[pin / 8] = (port->AFR[pin / 8] & ~(0xFu << (4 * (pin % 8)))) | (setup.af << (4 * (pin % 8)));
+    port->OSPEEDR = (port->OSPEEDR & ~(3u << (2 * pin))) | (setup.speed << (2 * pin));
 }
 
 

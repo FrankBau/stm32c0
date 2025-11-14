@@ -1,1 +1,0 @@
-Pin PA8 is used for EXTI interrupt generation.

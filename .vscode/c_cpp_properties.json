@@ -2,7 +2,9 @@
     "configurations": [
         {
             "name": "STM32",
-            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
+            "compileCommands": "${workspaceFolder}/build/Release/compile_commands.json",
+            "cStandard": "c17"
         }
-    ]
+    ],
+    "version": 4
 }

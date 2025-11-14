@@ -1,1 +1,0 @@
-multi channel ADC measurements, including MCU temperature and Vdda

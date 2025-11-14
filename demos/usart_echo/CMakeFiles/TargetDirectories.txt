@@ -1,3 +1,0 @@
-C:/Users/frank/OneDrive/Lehre/STM32/stm32c0_github/usart_echo/CMakeFiles/usart_echo.dir
-C:/Users/frank/OneDrive/Lehre/STM32/stm32c0_github/usart_echo/CMakeFiles/edit_cache.dir
-C:/Users/frank/OneDrive/Lehre/STM32/stm32c0_github/usart_echo/CMakeFiles/rebuild_cache.dir

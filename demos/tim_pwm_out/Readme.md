@@ -1,1 +1,0 @@
-set timer TIM3 channel 1 to PWM output mode. Used for dimming a LED
